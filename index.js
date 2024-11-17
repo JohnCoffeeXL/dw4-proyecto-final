@@ -28,15 +28,18 @@ app.use(express.static('public'));
 
 
 app.get('/', (req, res) => {
+    const currentUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
+
+    console.log(currentUrl);
     res.send(`
     <html>
-        <title>Proyecto Final - Datos de Series</title>
+        <title>Proyecto Final - JSON Series</title>
         <head>
             <link rel="stylesheet" type="text/css" href="/styles.css">
         </head>
         <body>
             <div id="container">
-                <a href="http://localhost:${PORT}/series">Ver JSON de Series</a>
+                <a href="${currentUrl}series">Ver JSON de Series</a>
             </div>
         </body>
     </html>
