@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 dotenv.config();
 
-
 const app = express();
 app.use(bodyParser.json());
 
@@ -24,6 +23,25 @@ const serieSchema = new mongoose.Schema ({
     });
 
 const Serie = mongoose.model('Serie', serieSchema);
+
+app.use(express.static('public'));
+
+
+app.get('/', (req, res) => {
+    res.send(`
+    <html>
+        <title>Proyecto Final - Datos de Series</title>
+        <head>
+            <link rel="stylesheet" type="text/css" href="/styles.css">
+        </head>
+        <body>
+            <div id="container">
+                <a href="http://localhost:${PORT}/series">Ver JSON de Series</a>
+            </div>
+        </body>
+    </html>
+    `);
+});
 
 app.post('/series' , async (req, res) => {
     try {
